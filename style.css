@@ -3,6 +3,10 @@
 }
 body {
   margin: 0px;
+  /* background-color: bisque; */
+  background-image: url("https://cdn.hipwallpaper.com/m/99/12/b7VUr1.jpg");
+  background-size: contain;
+  font-family: "Yanone Kaffeesatz", sans-serif;
 }
 .column-container {
   display: flex;
@@ -33,31 +37,38 @@ body {
 }
 
 .column-header {
-  font-size: 25px;
+  font-size: 50px;
   position: relative;
-  background-color: white;
+  background-color: bisque;
+  color: saddlebrown;
   top: 8px;
 }
+
 #big_coffee {
   user-select: none;
-  font-size: 128px;
+  font-size: 220px;
   cursor: pointer;
 }
 
 .counter-container {
-  font-size: 30px;
+  color: rgb(35, 16, 2);
+  text-shadow: rgb(255, 94, 0) 1px 0 10px;
+  font-size: 100px;
   margin: 10px;
+  line-height: 2;
 }
 
 .cps-container {
-  font-size: 20px;
+  color: rgb(35, 16, 2);
+  text-shadow: rgb(255, 94, 0) 1px 0 10px;
+  font-size: 50px;
 }
 
 #producer_container {
   padding: 10px;
   overflow: auto;
-  border: 2px black solid;
-  border-radius: 5px;
+  border: 5px #a5a58d solid;
+  border-radius: 20px;
 }
 
 .producer {
@@ -67,6 +78,9 @@ body {
   border-radius: 4px;
   display: flex;
   justify-content: space-between;
+  /* background-color: #fff1e6; */
+  background-color: bisque;
+  color: saddlebrown;
 }
 .producer-column {
   display: flex;
@@ -75,10 +89,33 @@ body {
 }
 
 .producer-title {
-  font-size: 20px;
+  font-size: 30px;
 }
 
 .producer button {
-  font-size: 15px;
+  font-size: 20px;
   width: 50px;
+  border-radius: 30px;
+  font-family: "Yanone Kaffeesatz", sans-serif;
+}
+.producer button:hover {
+  background-color: #774936;
+  color: white;
+}
+
+#big_coffee:hover {
+  animation: pulse 1s;
+  animation-timing-function: linear;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+    100% {
+      transform: scale(1);
+    }
+  }
 }

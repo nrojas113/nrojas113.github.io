@@ -179,6 +179,27 @@ function tick(data) {
 
 }
 
+/*SAVE TO LOCAL STORAGE*/
+
+const key = 'save'
+function save(data){
+  console.log(data)
+  localStorage.setItem(key, JSON.stringify(data))
+}
+
+function load(){
+  debugger;
+  console.log(this.data)
+  const strObject = localStorage.getItem(key)
+  const returnedObj = JSON.parse(strObject)
+  console.log(typeof returnedObj)
+  this.data = returnedObj
+  updateCoffeeView(this.data.coffee)
+  renderProducers(this.data)
+
+  console.log(this.data)
+}
+
 /*************************
  *  Start your engines!
  *************************/
@@ -209,8 +230,25 @@ if (typeof process === 'undefined') {
     buyButtonClick(event, data);
   });
 
+
+    /*SAVE & LOAD DATA*/
+
+    const saveBtn = document.getElementById('save');
+    saveBtn.addEventListener('click', ()=> {
+      save(this.window.data)
+    });
+
+    const loadBtn = document.getElementById('load');
+    loadBtn.addEventListener('click', ()=> {
+      load()
+    })
+
   // Call the tick function passing in the data object once per second
   setInterval(() => tick(data), 1000);
+
+
+
+
 }
 // Meanwhile, if we aren't in a browser and are instead in node
 // we'll need to exports the code written here so we can import and
