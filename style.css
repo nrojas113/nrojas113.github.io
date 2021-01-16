@@ -119,3 +119,40 @@ body {
     }
   }
 }
+
+#button-container {
+  width: 40em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#save,
+#load {
+  font-size: 25px;
+  width: 130px;
+  height: 60px;
+  border-radius: 30px;
+  font-family: "Yanone Kaffeesatz", sans-serif;
+  box-shadow: 10px 5px 5px saddlebrown;
+}
+
+#save:hover,
+#load:hover {
+  background-color: #774936;
+  color: white;
+}
+
+#game-state {
+  display: fixed;
+}
+#game-state p {
+  color: #014200;
+  text-shadow: black 1px 0 10px;
+  font-size: 30px;
+}
+
+#game-state span {
+  display: block;
+  color: white;
+}

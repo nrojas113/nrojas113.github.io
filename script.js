@@ -179,25 +179,25 @@ function tick(data) {
 
 }
 
-/*SAVE TO LOCAL STORAGE*/
+/*SAVE TO LOCAL STORAGE -> FUNCTIONS (EVENT LISTERNERS ARE LINE 236-245*/
 
 const key = 'save'
 function save(data){
+  // debugger;
   console.log(data)
+  //save the current data passed
   localStorage.setItem(key, JSON.stringify(data))
+  console.log(data)
 }
 
-function load(){
-  debugger;
+function retrieveSaveData(){
   console.log(this.data)
-  const strObject = localStorage.getItem(key)
-  const returnedObj = JSON.parse(strObject)
-  console.log(typeof returnedObj)
-  this.data = returnedObj
-  updateCoffeeView(this.data.coffee)
-  renderProducers(this.data)
-
-  console.log(this.data)
+  //retrieve saved data (string version) from local Storage
+  const savedDataStr = localStorage.getItem(key)
+  //convert the string back to object
+  const savedDataObj = JSON.parse(savedDataStr)
+  //return the saved data object
+  return savedDataObj;
 }
 
 /*************************
@@ -217,7 +217,7 @@ function load(){
 if (typeof process === 'undefined') {
   // Get starting data from the window object
   // (This comes from data.js)
-  const data = window.data;
+  let data = window.data;
 
   // Add an event listener to the giant coffee emoji
   const bigCoffee = document.getElementById('big_coffee');
@@ -231,16 +231,52 @@ if (typeof process === 'undefined') {
   });
 
 
-    /*SAVE & LOAD DATA*/
+    /*SAVE & LOAD DATA - > EVENT LISTNERS*/
 
     const saveBtn = document.getElementById('save');
+
     saveBtn.addEventListener('click', ()=> {
-      save(this.window.data)
+      //If save button is clicked, pass current window's data to the save function (line 185)
+      save(this.window.data);
+
+      //Create new element and display saved data information on browser
+      const gameState = document.createElement('p')
+      gameState.innerHTML = `
+      Data Successfully Saved!
+      <span>Saved Data --
+      Coffee: ${this.window.data.coffee}
+      CSP: ${this.window.data.totalCPS}
+      </span>`
+      const parent = document.getElementById('game-state')
+      if (parent.hasChildNodes()){
+        parent.removeChild(parent.firstChild)
+        parent.appendChild(gameState)
+      } else {
+        parent.appendChild(gameState)
+      }
     });
 
     const loadBtn = document.getElementById('load');
     loadBtn.addEventListener('click', ()=> {
-      load()
+      //if Start from saved data button is clicked,
+      const savedData = retrieveSaveData();
+      //retrieve the saved data through retrieve data function (line 190) and
+      updateCPSView(savedData.totalCPS);
+      //update the CPS view and reassign that saved data as current data.
+      data = savedData;
+      this.window.data = savedData;
+    })
+
+    window.addEventListener('load', () => {
+      const savedData = retrieveSaveData()
+      const gameState = document.createElement('p')
+      gameState.innerHTML = `
+      <span>Saved Data --
+      Coffee: ${savedData.coffee}
+      CSP: ${savedData.totalCPS}
+      </span>`
+      const parent = document.getElementById('game-state')
+      parent.appendChild(gameState)
     })
 
   // Call the tick function passing in the data object once per second
